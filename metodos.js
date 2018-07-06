@@ -1,9 +1,7 @@
 var primero ='D|00001659|TEPIC, NAY.   |014|002|';
 var fechas ='|22/02/2017';
 var formaPago='|001|   |                $0.00|            ';
-var fechal='|16/12/2018|'
-var encabezado='TIPO|CONTRATO|NOMBRE PLAZA|NUMERO PLAZA|NUMERO SUCURSAL|FECHA RECIBO|FECHA DE PAGO|FECHA DEPOSITO|IND IMPORTE|IMPORTE DOCUMENTO|FORMA DE PAGO|INTERESES O DESCUENTOS|IMPORTE INTERESES O DESCUENTOS|IMPORTE TOTAL PAGADO|HORA DE PAGO|                            TOTAL A PAGAR| NUMERO DE REFERENCIA| FECHA LIMITE DE PAGO| NOMBRE| CONCEPTO DE PAGO|CTE. COB. LITE|IND. ORIGEN|';
-
+var fechal='|16/12/2018|';
 
 function leer(){
     var fs = require("fs");
@@ -12,7 +10,6 @@ function leer(){
         var arreglo= data.split('\n');
         var final='';
       
-        
             for(var i=0;i<arreglo.length;i++){
          
             var signo=arreglo[i][72]+'|             ';
@@ -37,8 +34,15 @@ function leer(){
                 var temporal2=arreglo[i].slice(82,85);
                 importe='$'+temporal1+','+temporal2+'.'+puntodec;
                }
-
-            final=final+primero+fechas+fechas+fechas+'|'+signo+importe;
+               //Aqui especificamos la hora
+            var h1 = arreglo[i].slice(24,26);
+            var h2=arreglo[i].slice(26,28);
+            var hora ='|'+h1+':'+h2+'|';
+            var referencia='|'+arreglo[i].slice(109,149);
+            var nombre='nombre ejemplo 30 caracteres  ';
+            var concepto='|REINSCRIPCION||';
+            final=final+primero+fechas+fechas+fechas+'|'+signo+importe+formaPago+importe+hora+referencia+fechal+nombre+concepto+'\n';
+            
             
         }
         //finall= final.unshift('arrrg');
