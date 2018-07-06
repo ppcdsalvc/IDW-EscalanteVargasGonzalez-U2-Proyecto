@@ -21,6 +21,23 @@ function leer(){
             var puntodec=arreglo[i].slice(85,87)
             //conertimos importe en entero
             importe= parseInt(importe,10);
+
+            if(importe<10){
+                importe='$'+importe+'.'+puntodec+'     ';
+            }else if(importe<100){
+                importe='$'+importe+'.'+puntodec+'    ';
+            }else if(importe>100&&importe<1000){
+                importe='$'+importe+'.'+puntodec+'   ';
+            }else if(importe>=1000&&importe<10000){
+                var temporal1=arreglo[i][81];
+                var temporal2=arreglo[i].slice(82,85);
+                importe='$'+temporal1+','+temporal2+'.'+puntodec+' ';
+            }else if(importe>=10000){
+                var temporal1=arreglo[i].slice(80,82);
+                var temporal2=arreglo[i].slice(82,85);
+                importe='$'+temporal1+','+temporal2+'.'+puntodec;
+               }
+
             final=final+primero+fechas+fechas+fechas+'|'+signo+importe;
             
         }
